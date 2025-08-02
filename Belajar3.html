@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>For You 🎁</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Dancing Script', cursive;
+      color: #ff69b4;
+      text-shadow: 1px 1px 2px white;
+      font-size: 48px;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-image: url('BG.jpeg');
+      background-size: cover;
+      background-position: center;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .container {
+      padding: 20px;
+    }
+
+    #birthdayScreen {
+      margin: 0;
+      padding: 0;
+      background-size: cover;
+      background-position: center;
+      width: 3000vh;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    input[type="password"] {
+      padding: 10px;
+      font-size: 18px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      margin-top: 10px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 10px;
+      background-color: #ff69b4;
+      color: white;
+      border: none;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .cake-container {
+      position: relative;
+      width: 200px;
+      height: 300px;
+      margin: 0 auto;
+    }
+
+    .base, .layer1, .layer2, .layer3, .candles {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%) scaleY(0);
+      transform-origin: bottom;
+      animation: rise 0.5s forwards ease-out;
+    }
+
+    .base {
+      bottom: 0;
+      width: 220px;
+      height: 20px;
+      background-color: #f08080;
+      border-radius: 10px;
+      animation-delay: 0s;
+    }
+
+    .layer1 {
+      bottom: 20px;
+      width: 180px;
+      height: 60px;
+      background-color: #8b4513;
+      border-radius: 12px;
+      background-image: radial-gradient(#fff, transparent 40%);
+      animation-delay: 0.3s;
+    }
+
+    .layer2 {
+      bottom: 80px;
+      width: 140px;
+      height: 50px;
+      background-color: #d2691e;
+      border-radius: 12px;
+      background-image: radial-gradient(#ffb6c1, transparent 45%);
+      animation-delay: 0.6s;
+    }
+
+    .layer3 {
+      bottom: 130px;
+      width: 100px;
+      height: 40px;
+      background-color: #f4a460;
+      border-radius: 12px;
+      background-image: radial-gradient(#fffacd, transparent 50%);
+      animation-delay: 0.9s;
+    }
+
+    .candles {
+      bottom: 170px;
+      display: flex;
+      gap: 10px;
+      animation-delay: 1.2s;
+    }
+
+    .candle {
+      width: 8px;
+      height: 20px;
+      background-color: #ffb6c1;
+      border-radius: 2px;
+      position: relative;
+    }
+
+    .candle::before {
+      content: "";
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 6px;
+      height: 10px;
+      background-color: orange;
+      border-radius: 50% 50% 0 0;
+    }
+
+    #playBtn {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #ff69b4;
+      color: white;
+      border: none;
+      border-radius: 25px;
+      padding: 10px 25px;
+      font-size: 16px;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      transition: 0.3s ease;
+    }
+
+    #playBtn:hover {
+      background-color: #ff1493;
+    }
+
+    @keyframes rise {
+      to {
+        transform: translateX(-50%) scaleY(1);
+      }
+    }
+
+    .text {
+      margin-top: 300px;
+      font-size: 28px;
+      text-align: center;
+      opacity: 0;
+      animation: fadeIn 1s ease 1.5s forwards;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+
+    .heart {
+      position: absolute;
+      font-size: 24px;
+      animation: float 6s linear infinite;
+      color: red;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-600px) scale(1.5);
+        opacity: 0;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .cake-container {
+        transform: scale(0.8);
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Tampilan Awal -->
+  <div class="container" id="mainScreen">
+    <h2>For You</h2>
+    <img src="Bucket.jpeg" width="150" alt="bucket"><br>
+    <input type="password" id="password" placeholder="Masukkan password">
+    <button onclick="checkPassword()">Enter</button>
+  </div>
+
+  <!-- Tampilan Kedua -->
+  <div id="birthdayScreen">
+    <div class="cake-container">
+      <div class="base"></div>
+      <div class="layer1"></div>
+      <div class="layer2"></div>
+      <div class="layer3"></div>
+      <div class="candles">
+      <div class="candle"></div>
+      <div class="candle"></div>
+      <div class="candle"></div>
+    </div>
+      <div class="text">Happy Birthday</div>
+    </div>
+  </div>
+
+  <button id="playBtn">Putar Musik🎵</button>
+
+  <audio id="musik">
+    <source src="August.mp3" type="audio/mpeg">
+    Browser kamu nggak support audio.
+  </audio>
+
+  <!-- Love Floating -->
+  <div id="heartsContainer"></div>
+
+  <script>
+    document.getElementById("playBtn").addEventListener("click", function() {
+      const musik = document.getElementById("musik");
+      musik.play();
+    });
+
+    function checkPassword() {
+      const input = document.getElementById("password").value;
+      if (input === "Heaven") {
+        document.getElementById("mainScreen").style.display = "none";
+        document.getElementById("birthdayScreen").style.display = "block";
+        showHearts();
+      } else {
+        alert("Password salah! Coba lagi ya 😊");
+      }
+    }
+
+    function showHearts() {
+      const hearts = ["💗", "🌷", "💗", "🌷", "💗", "🌷", "💗"];
+      const container = document.getElementById("heartsContainer");
+
+      for (let i = 0; i < 30; i++) {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.top = Math.random() * 100 + 100 + "vh";
+        heart.style.animationDelay = Math.random() * 5 + "s";
+        container.appendChild(heart);
+      }
+    }
+  </script>
+</body>
+</html>
